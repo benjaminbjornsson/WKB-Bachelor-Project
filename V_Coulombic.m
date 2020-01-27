@@ -6,5 +6,6 @@ function V = V_Coulombic(r, Consts)
     l = Consts(3);
     
     V = 1./r + (l*(l + 1))./(2*r.^2);
+    V(r <= R) = -V_0;
 end
 

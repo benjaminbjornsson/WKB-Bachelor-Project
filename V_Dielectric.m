@@ -4,9 +4,10 @@ function V = V_Dielectric(r,Consts)
     V_0 = Consts(1);
     epsilon = Consts(2);
     R = Consts(3);
-    l = Consts(4);
+    delta = Consts(4);
+    l = Consts(5);
     
-    V = -((epsilon - 1)*R^3)./((epsilon + 2)*r.^2.*(r.^2 - R^2)) + 1./r + (l*(l + 1))./(2*r.^2);
-    V(r <= R) = NaN;
+    V = -((epsilon - 1)*R^3)./(2*(epsilon + 2)*r.^2.*(r.^2 - R^2)) + 1./r + (l*(l + 1))./(2*r.^2);
+    V(r <= (R + delta)) = -V_0;
 end
 
