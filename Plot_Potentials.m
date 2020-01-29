@@ -4,13 +4,14 @@ l = 0:3;        % Angular momentum
 delta = zeros(1, length(l));
 alpha = 0.529;  % Conversion factor Å <-> a_0
 beta = 27.211;  % Conversion factor Hartree <-> eV
-V_0 = 0.75; % Potential < R [eV]
+V_0 = 0.75;     % Potential < R [eV]
 r = linspace(0, 30, 1e5);
 
 for i = 1:length(delta)
     Consts = [V_0/beta epsilon R/alpha 0 l(i)];
-    delta(i) = bisection_search(@V_Dielectric, Consts, -V_0/beta, [R R + 1]/alpha, 1e-5)*alpha - R;
+    delta(i) = bisection_search(@V_Dielectric, Consts, -V_0/beta, [R (R + 1)]/alpha, 1e-5, false, false)*alpha - R;
 end
+delta = ones(1,4)*0.1;
 
 fig = figure;
 hold on
